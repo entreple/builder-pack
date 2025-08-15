@@ -34,7 +34,7 @@
         --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter,
           "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
         --container: 1160px;
-        --container-pad: 1rem;
+        --container-pad: clamp(18px, 5vw, 28px);
       }
       * {
         box-sizing: border-box;
@@ -42,6 +42,8 @@
       html,
       body {
         height: 100%;
+        width: 100%;
+        overflow-x: hidden;
       }
       body {
         margin: 0;
@@ -61,10 +63,14 @@
         height: auto;
         display: block;
       }
+
+      /* Layout container with safe-area padding */
       .container {
-        width: min(var(--container), 92%);
+        max-width: var(--container);
+        width: 100%;
         margin-inline: auto;
-        padding-inline: var(--container-pad);
+        padding-left: max(var(--container-pad), env(safe-area-inset-left));
+        padding-right: max(var(--container-pad), env(safe-area-inset-right));
       }
       section,
       .hero {
@@ -126,7 +132,7 @@
         align-items: center;
         justify-content: space-between;
         gap: 1rem;
-        padding: 1rem 0;
+        padding-block: 1rem;
       }
       .brand {
         display: flex;
@@ -230,6 +236,7 @@
         box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
         padding: 0.6rem;
         min-width: 220px;
+        max-width: calc(100vw - 2rem);
       }
       .drawer.show {
         display: flex;
@@ -243,7 +250,7 @@
         background: rgba(255, 255, 255, 0.04);
       }
 
-      /* HERO — glow & watermark */
+      /* HERO — glow only */
       .hero {
         position: relative;
         overflow: hidden;
@@ -265,16 +272,9 @@
           linear-gradient(180deg, #0b0c10, #0d0e12 40%, #0c0d10);
         z-index: -1;
       }
+      /* watermark logo removed per request */
       .hero:after {
-        content: "";
-        position: absolute;
-        inset: auto -10% -10% auto;
-        width: 220px;
-        height: 220px;
-        background: url("/assets/logo.png") center/cover no-repeat;
-        opacity: 0.06;
-        filter: blur(0.2px) drop-shadow(0 8px 24px rgba(78, 118, 228, 0.15));
-        transform: rotate(8deg);
+        content: none;
       }
 
       /* Section background helpers with fade in/out */
@@ -383,7 +383,9 @@
       /* Decorative SVG lines */
       .dec-lines {
         position: absolute;
-        inset: auto 0 -30px 0;
+        left: 0;
+        right: 0;
+        bottom: -30px;
         height: 140px;
         pointer-events: none;
         opacity: 0.18;
@@ -519,7 +521,7 @@
         font-weight: 700;
       }
       details p {
-        color: var(--muted);
+        color: #b7c0ce;
         margin: 0.9rem 0 0;
       }
 
@@ -549,13 +551,13 @@
           --container: 720px;
         }
         .grid-3 {
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1fr;
         }
         .grid-2 {
           grid-template-columns: 1fr;
         }
         .hero .stats {
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1fr;
         }
         .btn {
           width: 100%;
@@ -571,7 +573,6 @@
         }
       }
       @media (max-width: 640px) {
-        /* Mobile button spacing fix */
         .hero .cta {
           gap: 0.8rem;
         }
@@ -583,7 +584,6 @@
         }
       }
       @supports not (gap: 1rem) {
-        /* Fallback for older mobile browsers without flex gap */
         .hero .cta {
           margin: -0.4rem;
         }
@@ -879,36 +879,36 @@
       >
         <div>© <span id="year"></span> Entreple. All rights reserved.</div>
         <div class="social">
-          <!-- <a class="nav-link" href="/policies.html#privacy" rel="nofollow"
+          <a class="nav-link" href="/policies.html#privacy" rel="nofollow"
             >Privacy</a
           >
           <a class="nav-link" href="/policies.html#terms" rel="nofollow"
             >Terms</a
-          > -->
+          >
           <a
             class="nav-link"
-            href="https://youtube.com/@entreple"
+            href="https://youtube.com"
             target="_blank"
             rel="noopener"
             >YouTube</a
           >
           <a
             class="nav-link"
-            href="https://x.com/@entrepleapp?=21"
+            href="https://x.com"
             target="_blank"
             rel="noopener"
             >X</a
           >
           <a
             class="nav-link"
-            href="https://tiktok.com/@entreple"
+            href="https://tiktok.com"
             target="_blank"
             rel="noopener"
             >TikTok</a
           >
           <a
             class="nav-link"
-            href="https://instagram.com/entreple"
+            href="https://instagram.com"
             target="_blank"
             rel="noopener"
             >Instagram</a
@@ -921,7 +921,7 @@
     <script
       defer
       data-domain="entreple.com"
-      src="https://entreple.com"
+      src="https://plausible.io/js/script.js"
     ></script>
 
     <script>
