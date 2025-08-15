@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Entreple — Build a Brand in 3 Days</title>
+    <meta
+      name="description"
+      content="A focused, 1:1 brand–building program. Launch faster with a clear plan, assets, and guidance."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://entreple.com/" />
+    <meta property="og:title" content="Entreple — Build a Brand in 3 Days" />
+    <meta
+      property="og:description"
+      content="A focused, 1:1 brand–building program. Launch faster with a clear plan, assets, and guidance."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/og-image.jpg" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <link rel="icon" href="/assets/logo.png" />
+    <style>
+      :root {
+        --bg: #0d0d0d;
+        --text: #fafafa;
+        --muted: #b7c0ce;
+        --primary: #4e76e4;
+        --primary-weak: #7c99f1;
+        --card: #101216;
+        --stroke: #1c1f27;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        --radius: 18px;
+        --radius-lg: 24px;
+        --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter,
+          "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        --container: 1160px;
+        --container-pad: 1rem;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        background: #0b0c10;
+        color: var(--text);
+        font-family: var(--font);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.7;
+        letter-spacing: 0.2px;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+      .container {
+        width: min(var(--container), 92%);
+        margin-inline: auto;
+        padding-inline: var(--container-pad);
+      }
+      section,
+      .hero {
+        padding-block: clamp(48px, 8vw, 96px);
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        padding: 1rem 1.4rem;
+        border-radius: 999px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        transition: 0.3s transform ease, 0.35s background ease,
+          0.35s box-shadow ease;
+      }
+      .btn-primary {
+        background: linear-gradient(
+          180deg,
+          var(--primary),
+          var(--primary-weak)
+        );
+        box-shadow: 0 12px 30px rgba(78, 118, 228, 0.35);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+      }
+      .btn-primary:focus-visible,
+      .btn-primary:hover {
+        animation: pulse 1.2s ease-out 1;
+      }
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(78, 118, 228, 0.45);
+        }
+        100% {
+          box-shadow: 0 0 0 22px rgba(78, 118, 228, 0);
+        }
+      }
+      .btn-ghost {
+        border: 1px solid var(--stroke);
+        background: #0f1116;
+      }
+
+      /* Header */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(12, 14, 18, 0.7);
+        backdrop-filter: saturate(1.2) blur(10px);
+        border-bottom: 1px solid var(--stroke);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.3px;
+      }
+      .logo {
+        width: 28px;
+        height: 28px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+
+      /* Nav links — minimal chips */
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+      }
+      .nav-link {
+        position: relative;
+        padding: 0.6rem 0.9rem;
+        border-radius: 12px;
+      }
+      .nav-link:after {
+        content: "";
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 8px;
+        height: 2px;
+        border-radius: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(124, 153, 241, 0.6),
+          transparent
+        );
+        opacity: 0;
+        transform: translateY(4px);
+        transition: 0.3s;
+      }
+      .nav-link:hover {
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .nav-link:hover:after {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Mobile menu */
+      .nav-toggle {
+        display: none;
+        position: relative;
+        width: 42px;
+        height: 42px;
+        border: 1px solid var(--stroke);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .nav-toggle .bar {
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        height: 2px;
+        background: #e9eefb;
+        border-radius: 2px;
+        transition: transform 0.3s ease, opacity 0.25s ease, top 0.3s ease;
+      }
+      .nav-toggle .bar:nth-child(1) {
+        top: 13px;
+      }
+      .nav-toggle .bar:nth-child(2) {
+        top: 20px;
+      }
+      .nav-toggle .bar:nth-child(3) {
+        top: 27px;
+      }
+      .nav-toggle.active .bar:nth-child(1) {
+        top: 20px;
+        transform: rotate(45deg);
+      }
+      .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle.active .bar:nth-child(3) {
+        top: 20px;
+        transform: rotate(-45deg);
+      }
+
+      .drawer {
+        display: none;
+        position: absolute;
+        right: 1rem;
+        top: 64px;
+        background: linear-gradient(180deg, #0f1116, #0d1016);
+        border: 1px solid var(--stroke);
+        border-radius: 16px;
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+        padding: 0.6rem;
+        min-width: 220px;
+      }
+      .drawer.show {
+        display: flex;
+        flex-direction: column;
+      }
+      .drawer a {
+        padding: 0.8rem 1rem;
+        border-radius: 12px;
+      }
+      .drawer a:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      /* HERO — glow & watermark */
+      .hero {
+        position: relative;
+        overflow: hidden;
+      }
+      .hero:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            1200px 800px at 20% -10%,
+            rgba(78, 118, 228, 0.18),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 600px at 90% 10%,
+            rgba(124, 153, 241, 0.12),
+            transparent 60%
+          ),
+          linear-gradient(180deg, #0b0c10, #0d0e12 40%, #0c0d10);
+        z-index: -1;
+      }
+      .hero:after {
+        content: "";
+        position: absolute;
+        inset: auto -10% -10% auto;
+        width: 220px;
+        height: 220px;
+        background: url("/assets/logo.png") center/cover no-repeat;
+        opacity: 0.06;
+        filter: blur(0.2px) drop-shadow(0 8px 24px rgba(78, 118, 228, 0.15));
+        transform: rotate(8deg);
+      }
+
+      /* Section background helpers with fade in/out */
+      .bg-grid {
+        position: relative;
+        isolation: isolate;
+      }
+      .bg-grid:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.02),
+            rgba(255, 255, 255, 0.01)
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.03) 0 1px,
+            transparent 1px 80px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.02) 0 1px,
+            transparent 1px 80px
+          );
+        -webkit-mask: linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 12%,
+          #000 88%,
+          transparent 100%
+        );
+        mask: linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 12%,
+          #000 88%,
+          transparent 100%
+        );
+        z-index: -1;
+      }
+
+      .bg-angled {
+        position: relative;
+        isolation: isolate;
+      }
+      .bg-angled:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            120deg,
+            rgba(78, 118, 228, 0.12),
+            transparent 30%
+          ),
+          linear-gradient(300deg, rgba(124, 153, 241, 0.08), transparent 35%);
+        -webkit-mask: linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 12%,
+          #000 88%,
+          transparent 100%
+        );
+        mask: linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 12%,
+          #000 88%,
+          transparent 100%
+        );
+        z-index: -1;
+      }
+
+      .bg-spot {
+        position: relative;
+        isolation: isolate;
+      }
+      .bg-spot:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            600px 300px at 50% -10%,
+            rgba(124, 153, 241, 0.15),
+            transparent 60%
+          ),
+          linear-gradient(180deg, #0b0c10, #0d0e12);
+        -webkit-mask: linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 12%,
+          #000 88%,
+          transparent 100%
+        );
+        mask: linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 12%,
+          #000 88%,
+          transparent 100%
+        );
+        z-index: -1;
+      }
+
+      /* Decorative SVG lines */
+      .dec-lines {
+        position: absolute;
+        inset: auto 0 -30px 0;
+        height: 140px;
+        pointer-events: none;
+        opacity: 0.18;
+      }
+
+      /* Grids */
+      .hero .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.2rem;
+        margin-top: 2rem;
+      }
+      .stat {
+        border: 1px solid var(--stroke);
+        padding: 1.2rem;
+        border-radius: 14px;
+        background: #0e1014;
+        text-align: center;
+      }
+      .stat b {
+        display: block;
+        font-size: 1.3rem;
+        margin-bottom: 0.2rem;
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      /* Features/Steps */
+      .feature {
+        padding: 1.4rem;
+        border-radius: 14px;
+        border: 1px solid var(--stroke);
+        background: linear-gradient(180deg, #0f1116, #0d0f14);
+      }
+      .feature h3 {
+        margin: 0 0 0.6rem;
+      }
+      .feature p {
+        color: var(--muted);
+      }
+      .steps {
+        counter-reset: step;
+        gap: 1.5rem;
+      }
+      .step {
+        position: relative;
+        padding: 1.4rem 1.4rem 1.4rem 3.4rem;
+        border: 1px solid var(--stroke);
+        border-radius: 14px;
+        background: #0f1013;
+      }
+      .step:before {
+        counter-increment: step;
+        content: counter(step);
+        position: absolute;
+        left: 1rem;
+        top: 1.4rem;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--primary);
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+      }
+
+      /* Pricing */
+      .pricing {
+        display: grid;
+        gap: 2rem;
+      }
+      .price-card {
+        padding: 2rem;
+        border-radius: 16px;
+        border: 1px solid var(--stroke);
+        background: linear-gradient(180deg, #0e1014, #0c0d10);
+      }
+      .price {
+        font-size: clamp(2rem, 3.5vw, 2.6rem);
+        font-weight: 900;
+        margin: 0.4rem 0;
+      }
+      .note {
+        color: #9aa4b2;
+        font-size: 1rem;
+      }
+      .bullets {
+        display: grid;
+        gap: 0.8rem;
+        margin: 1.4rem 0;
+      }
+      .bullets li {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .check {
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        background: rgba(78, 118, 228, 0.2);
+        display: grid;
+        place-items: center;
+        border: 1px solid #2a3b57;
+      }
+
+      details {
+        border: 1px solid var(--stroke);
+        border-radius: 14px;
+        padding: 1.4rem;
+        background: #0f1116;
+      }
+      details + details {
+        margin-top: 1rem;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 700;
+      }
+      details p {
+        color: var(--muted);
+        margin: 0.9rem 0 0;
+      }
+
+      footer {
+        border-top: 1px solid var(--stroke);
+        padding: 2rem 0;
+        color: #a9b3c2;
+      }
+      .social {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1024px) {
+        :root {
+          --container: 980px;
+        }
+        .section-title {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+      @media (max-width: 768px) {
+        :root {
+          --container: 720px;
+        }
+        .grid-3 {
+          grid-template-columns: 1fr 1fr;
+        }
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .hero .stats {
+          grid-template-columns: 1fr 1fr;
+        }
+        .btn {
+          width: 100%;
+          max-width: 420px;
+        }
+        .nav-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .nav-links {
+          display: none;
+        }
+      }
+      @media (max-width: 640px) {
+        /* Mobile button spacing fix */
+        .hero .cta {
+          gap: 0.8rem;
+        }
+        .hero .cta > .btn {
+          width: 100%;
+        }
+        .hero .cta > .btn + .btn {
+          margin-top: 0.8rem;
+        }
+      }
+      @supports not (gap: 1rem) {
+        /* Fallback for older mobile browsers without flex gap */
+        .hero .cta {
+          margin: -0.4rem;
+        }
+        .hero .cta > * {
+          margin: 0.4rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+        html:focus-within {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container nav">
+        <div class="brand">
+          <img
+            src="/assets/logo.png"
+            width="28"
+            height="28"
+            alt="Entreple logo"
+            class="logo"
+            loading="lazy"
+          />
+          <a href="#top" aria-label="Entreple home">Entreple</a>
+        </div>
+        <button
+          class="nav-toggle"
+          aria-controls="primary-drawer"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        <nav class="nav-links" aria-label="Primary">
+          <a class="nav-link" href="#program">Program</a>
+          <a class="nav-link" href="#pricing">Pricing</a>
+          <a class="nav-link" href="#faq">FAQ</a>
+        </nav>
+        <div
+          id="primary-drawer"
+          class="drawer"
+          role="dialog"
+          aria-label="Mobile menu"
+        >
+          <a class="nav-link" href="#program">Program</a>
+          <a class="nav-link" href="#pricing">Pricing</a>
+          <a class="nav-link" href="#faq">FAQ</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <main id="top" class="hero">
+      <div class="container" style="position: relative">
+        <span
+          class="pill"
+          style="
+            border: 1px solid #2a3550;
+            background: rgba(124, 153, 241, 0.06);
+          "
+          >1:1 Brand Building • 3 Days</span
+        >
+        <h1>From Nobody to Brand — fast, focused, real.</h1>
+        <p>
+          Build a clean, credible brand in days, not months. A guided, hands-on
+          program: name, identity, simple website, content plan, and launch
+          checklist — done together.
+        </p>
+        <div class="cta">
+          <a id="buyNow" class="btn btn-primary" href="#pricing">Buy Now</a>
+          <a class="btn btn-ghost" href="#program">See how it works</a>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <b>3 Days</b><span class="muted">clear roadmap</span>
+          </div>
+          <div class="stat">
+            <b>1:1</b><span class="muted">direct guidance</span>
+          </div>
+          <div class="stat">
+            <b>No fluff</b><span class="muted">results only</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Features -->
+    <section id="program" class="bg-grid" style="position: relative">
+      <svg
+        class="dec-lines"
+        viewBox="0 0 1200 140"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="glow" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="rgba(124,153,241,0)" />
+            <stop offset="50%" stop-color="rgba(124,153,241,.6)" />
+            <stop offset="100%" stop-color="rgba(124,153,241,0)" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M0,100 C300,20 900,180 1200,80"
+          stroke="url(#glow)"
+          stroke-width="2"
+          fill="none"
+        />
+        <path
+          d="M0,120 C400,60 800,160 1200,60"
+          stroke="url(#glow)"
+          stroke-width="1"
+          fill="none"
+          opacity=".6"
+        />
+      </svg>
+      <div class="container">
+        <div class="section-title">
+          <h2>What you get</h2>
+          <span
+            class="pill"
+            style="border-color: #2a3550; background: rgba(124, 153, 241, 0.06)"
+            >Practical. Minimal. Professional.</span
+          >
+        </div>
+        <div class="grid grid-3">
+          <div class="feature">
+            <h3>Name & Identity</h3>
+            <p>
+              Unique brand name options, logo concept, color system, and usage
+              rules that feel premium and timeless.
+            </p>
+          </div>
+          <div class="feature">
+            <h3>Sales Page</h3>
+            <p>
+              Conversion-focused one-pager with clear message, social proof
+              placeholders, and checkout link.
+            </p>
+          </div>
+          <div class="feature">
+            <h3>Content Plan</h3>
+            <p>
+              30-day publishing schedule + reusable templates for short-form
+              posts and long-form outlines.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Steps -->
+    <section class="bg-angled" style="position: relative">
+      <svg
+        class="dec-lines"
+        viewBox="0 0 1200 140"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="glow2" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="rgba(78,118,228,0)" />
+            <stop offset="50%" stop-color="rgba(78,118,228,.7)" />
+            <stop offset="100%" stop-color="rgba(78,118,228,0)" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M0,110 C260,50 940,120 1200,40"
+          stroke="url(#glow2)"
+          stroke-width="2"
+          fill="none"
+        />
+      </svg>
+      <div class="container steps">
+        <div class="grid grid-3">
+          <div class="step">
+            <h3>Day 1 — Foundation</h3>
+            <p>
+              Positioning, audience, name shortlist, visual direction, tone of
+              voice. Decisions made fast.
+            </p>
+          </div>
+          <div class="step">
+            <h3>Day 2 — Assets</h3>
+            <p>
+              Logo concept, color palette, typography, sales page copy &
+              structure, content system.
+            </p>
+          </div>
+          <div class="step">
+            <h3>Day 3 — Launch</h3>
+            <p>
+              Sales page live, payment connected, social profiles aligned,
+              30‑day publishing plan ready.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="bg-spot">
+      <div class="container pricing">
+        <div class="price-card">
+          <h2>Entreple Builder Pack</h2>
+          <div class="price">$100</div>
+          <p class="note">Limited spots. 1:1 guidance, fast execution.</p>
+          <ul class="bullets">
+            <li><span class="check">✓</span> 3 x sessions (60–90 min)</li>
+            <li><span class="check">✓</span> Brand name & visual direction</li>
+            <li><span class="check">✓</span> Conversion‑ready sales page</li>
+            <li><span class="check">✓</span> 30‑day content calendar</li>
+            <li><span class="check">✓</span> Launch checklist & next steps</li>
+          </ul>
+          <a
+            id="purchaseLink"
+            class="btn btn-primary"
+            href="https://your-purchase-link"
+            target="_blank"
+            rel="noopener"
+            >Proceed to Checkout</a
+          >
+          <p class="note" style="margin-top: 0.8rem">
+            No refunds. Please read the <a href="#faq">FAQ</a> before purchase.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-title">
+          <h2>FAQ</h2>
+          <span
+            class="pill"
+            style="border-color: #2a3550; background: rgba(124, 153, 241, 0.06)"
+            >Read before purchase</span
+          >
+        </div>
+        <details>
+          <summary>Is this live or pre-recorded?</summary>
+          <p>
+            Live 1:1. We move fast using a structured checklist and templates.
+            Decision > delivery > launch.
+          </p>
+        </details>
+        <details>
+          <summary>What tools do we use?</summary>
+          <p>
+            Simple stack: Figma for visuals, a clean HTML page for your first
+            sales site, and whatever payment link you already have.
+          </p>
+        </details>
+        <details>
+          <summary>Refund policy?</summary>
+          <p>
+            No refunds. Spots are limited and time‑boxed. Please make sure the
+            scope fits your needs before purchasing.
+          </p>
+        </details>
+        <details>
+          <summary>How do we schedule?</summary>
+          <p>
+            After payment, you’ll receive a link to book your first session. We
+            plan the remaining sessions during the call.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div
+        class="container"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          flex-wrap: wrap;
+        "
+      >
+        <div>© <span id="year"></span> Entreple. All rights reserved.</div>
+        <div class="social">
+          <!-- <a class="nav-link" href="/policies.html#privacy" rel="nofollow"
+            >Privacy</a
+          >
+          <a class="nav-link" href="/policies.html#terms" rel="nofollow"
+            >Terms</a
+          > -->
+          <a
+            class="nav-link"
+            href="https://youtube.com/@entreple"
+            target="_blank"
+            rel="noopener"
+            >YouTube</a
+          >
+          <a
+            class="nav-link"
+            href="https://x.com/@entrepleapp?=21"
+            target="_blank"
+            rel="noopener"
+            >X</a
+          >
+          <a
+            class="nav-link"
+            href="https://tiktok.com/@entreple"
+            target="_blank"
+            rel="noopener"
+            >TikTok</a
+          >
+          <a
+            class="nav-link"
+            href="https://instagram.com/entreple"
+            target="_blank"
+            rel="noopener"
+            >Instagram</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- Plausible Analytics (privacy-friendly). Replace domain if needed. -->
+    <script
+      defer
+      data-domain="entreple.com"
+      src="https://entreple.com"
+    ></script>
+
+    <script>
+      // Year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Smooth anchors
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const id = a.getAttribute("href");
+          if (id.length > 1) {
+            e.preventDefault();
+            document.querySelector(id).scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+
+      // Highlight CTA after jump (micro-interaction)
+      const buyNow = document.getElementById("buyNow");
+      buyNow?.addEventListener("click", (e) => {
+        e.preventDefault();
+        document
+          .querySelector("#pricing")
+          .scrollIntoView({ behavior: "smooth" });
+        const btn = document.getElementById("purchaseLink");
+        btn.classList.add("shadow");
+        setTimeout(() => btn.classList.remove("shadow"), 1200);
+      });
+
+      // Mobile nav toggle (morph to X + drawer)
+      const toggle = document.querySelector(".nav-toggle");
+      const drawer = document.getElementById("primary-drawer");
+      toggle?.addEventListener("click", () => {
+        toggle.classList.toggle("active");
+        const open = drawer.classList.toggle("show");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    </script>
+  </body>
+</html>
